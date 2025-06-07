@@ -1,10 +1,52 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "tdl";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Student Information
+    $username = isset($_POST['username']) ? mysqli_real_escape_string($conn, $_POST['username']) : "";
+    $password = isset($_POST['password']) ? mysqli_real_escape_string($conn, $_POST['password']) : "";
+
+    $check_query = "SELECT * FROM accounts WHERE username = '$username'";
+    $result = mysqli_query($conn, $check_query);
+
+    if (mysqli_num_rows($result) > 0) {
+        echo "<script>alert('Error: Username already exists.'); window.location.href = 'reg.php'</script>";
+    } else {
+        $sql = "INSERT INTO accounts 
+    (username, password) 
+    VALUES 
+    ('$username', '$password')";
+
+        // Execute Query
+        if (mysqli_query($conn, $sql)) {
+            echo "<script>alert('Registration successful!'); window.location.href = 'index.php'</script>";
+        } else {
+            echo "<script>alert('Error: Unable to add records.');</script>";
+        }
+    }
+}
+mysqli_close($conn);
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WhosNext?</title>
+    <title>Taskly</title>
     <link href="https://fonts.googleapis.com/css?family=Inter:600,400" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="image/wn_2twoogo.jpg">
@@ -371,7 +413,7 @@
             <h2 class="enter-heading">
                 Sign Up
             </h2>
-            <form method="POST" action="register.php">
+            <form method="POST" action="">
                 <div class="input-group mb-4">
                     <label for="username" class="form-label">Username</label>
                     <input class="form-control" type="text" id="username" name="username" placeholder="e.g. johndoe123" required autocomplete="off">
