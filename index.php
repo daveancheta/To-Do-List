@@ -1,5 +1,5 @@
 <?php
-session_start(); // Start the session
+session_start(); 
 
 $servername = "localhost";
 $username = "root";
@@ -53,7 +53,7 @@ if (isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WhosNext?</title>
+    <title>Taskly</title>
     <link href="https://fonts.googleapis.com/css?family=Inter:600,400" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="image/wn_2twoogo.jpg">
@@ -468,8 +468,7 @@ if (isset($_POST['submit'])) {
         <div class="input-group mb-4">
             <label for="username" class="form-label">Username</label>
             <input class="form-control" type="text" id="username" name="username" 
-                   placeholder="e.g. dave123" required autocomplete="off" 
-                   value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>">
+                   placeholder="e.g. dave123" required autocomplete="off">
         </div>
         
         <div class="input-group mb-4">
@@ -485,7 +484,7 @@ if (isset($_POST['submit'])) {
         <button class="btn-green" type="submit" name="submit">Login</button>
         
         <div class="no-account-text mt-3">
-            Don't have an account yet? <a href="register.php" class="signup-link">Sign up</a>
+            Don't have an account yet? <a href="reg.php" class="signup-link">Sign up</a>
         </div>
     </form>
         </div>
